@@ -39,6 +39,6 @@ import MaterialComponents/Cards
 
 ## Meta
 
-Your Name – [@gunasai](https://twitter.com/gunasai) – garapatigunasai@gmail.com
+Your Name – [@gunasaig](https://twitter.com/gunasaig) – garapatigunasai@gmail.com
 
 
