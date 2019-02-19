@@ -29,11 +29,12 @@ use_frameworks!
     pod 'MaterialComponents/Cards'
 ```
 
-To get the full benefits import `YourLibrary` wherever you import UIKit
+To import `JVFloatLabeledTextField` and `MaterialComponents/Cards`
 
 ``` swift
 import UIKit
-import YourLibrary
+import JVFloatLabeledTextField
+import MaterialComponents/Cards
 ```
 
 ## Meta
