@@ -1,0 +1,6 @@
+framework module Pods_MoviesNow {
+  umbrella header "Pods-MoviesNow-umbrella.h"
+
+  export *
+  module * { export * }
+}

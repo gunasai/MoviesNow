@@ -1,0 +1,37 @@
+PODS:
+  - JVFloatLabeledTextField (1.2.1)
+  - MaterialComponents/Cards (76.0.0):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+  - MaterialComponents/Ink (76.0.0):
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Icons/Base (76.0.0)
+  - MaterialComponents/private/Icons/ic_check_circle (76.0.0):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Math (76.0.0)
+  - MaterialComponents/ShadowElevations (76.0.0)
+  - MaterialComponents/ShadowLayer (76.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Shapes (76.0.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+
+DEPENDENCIES:
+  - JVFloatLabeledTextField
+  - MaterialComponents/Cards
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - JVFloatLabeledTextField
+    - MaterialComponents
+
+SPEC CHECKSUMS:
+  JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
+  MaterialComponents: a1a359d3915155be5dd462aaceb0cf9be7ac7148
+
+PODFILE CHECKSUM: 7acaf26ff5fee25ac875283416e820d6d7513331
+
+COCOAPODS: 1.5.3
