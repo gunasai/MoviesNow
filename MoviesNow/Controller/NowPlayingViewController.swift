@@ -13,7 +13,7 @@ import MaterialComponents.MaterialCards
 class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     
-    var movies: [Result] = []
+    var movies = [Movie]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     var moviesNowPlaying = ["End Game", "Dark Knight", "Spider Man"]
@@ -23,16 +23,9 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TMDBClient.getMoviesNowPlaying { (moviesNow, error) in
-            if moviesNow?.results != nil {
-                DispatchQueue.main.async {
-                    self.movies = (moviesNow?.results)!
-                    self.collectionView.reloadData()
-                }
-                
-            } else {
-                print("No movies playing")
-            }
+        TMDBClient.getMoviesNowPlaying { (movies, error) in
+            self.movies = movies
+            self.collectionView.reloadData()
         }
         
         setUpNavBar()
@@ -41,6 +34,7 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
     func setUpNavBar() {
         navigationController?.navigationBar.topItem?.title = "Now Playing"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.view.backgroundColor = UIColor.white
     }
     
     
@@ -63,16 +57,12 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
         cell.setShadowElevation(ShadowElevation(18.0), for: .selected)
         cell.setShadowColor(UIColor.blue, for: .highlighted)
         
-        print("MOVIE TITLE: \(movies[indexPath.row].originalTitle)")
-        
         cell.movieName.text = movies[indexPath.row].originalTitle
-        TMDBClient.getPoster { (poster, error) in
+        TMDBClient.getPoster(poster: movies[indexPath.row].backdropPath!) { (poster, error) in
             if let poster = poster {
                 DispatchQueue.main.async {
                     cell.moviePoster.image = poster
                 }
-            } else {
-                print("No poster found")
             }
         }
         cell.movieDescription.text = movies[indexPath.row].overview

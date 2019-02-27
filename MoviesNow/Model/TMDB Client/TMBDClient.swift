@@ -30,8 +30,9 @@ class TMDBClient {
         case account
         case gravatar(String)
         case nowPlaying
-        case posterPath
+        case posterPath(String)
         case logout
+        case search(String)
         
         
         var stringValue: String {
@@ -75,14 +76,18 @@ class TMDBClient {
                         EndPoints.apiKeyParam + "&language=en-US" +
                         "&page=1"
                 
-                case .posterPath:
-                    return "https://image.tmdb.org/t/p/w185/8RKBHHRqOMOLh5qW3sS6TSFTd8h.jpg"
+                case .posterPath(let poster):
+                    return "https://image.tmdb.org/t/p/w342/\(poster)"
                 
                 
                 case .logout:
                     return
                         EndPoints.base + "/authentication/session" +
                         EndPoints.apiKeyParam
+                
+                case .search(let query):
+                    return EndPoints.base + "/search/movie" + EndPoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""))"
+                
                 
             }
                 
@@ -119,6 +124,33 @@ class TMDBClient {
         
     }
     
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, response: ResponseType.Type, body: RequestType, completionHandler: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(body)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+                return
+            }
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                DispatchQueue.main.async {
+                    completionHandler(responseObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+            }
+        }
+        task.resume()
+    }
+    
     class func getRequestToken(completionHandler: @escaping (Bool, Error?) -> Void) {
         
         taskForGETRequest(url: EndPoints.getRequestToken.url, response: RequestTokenResponse.self) { (response, error) in
@@ -133,59 +165,27 @@ class TMDBClient {
     }
     
     class func login(username: String, password: String, completionHandler: @escaping (Bool, Error?) -> Void) {
-        
-        var request = URLRequest(url: EndPoints.login.url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let body = LoginRequest(username: username, password: password, requestToken: Auth.reqestToken)
-        request.httpBody = try! JSONEncoder().encode(body)
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                completionHandler(false, error)
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let responseObject = try decoder.decode(RequestTokenResponse.self, from: data)
-                UserDefaults.standard.set(responseObject.requestToken, forKey: "requestToken")
-                Auth.reqestToken = responseObject.requestToken
+        taskForPOSTRequest(url: EndPoints.login.url, response: RequestTokenResponse.self, body: body) { (response, error) in
+            if let response = response {
+                UserDefaults.standard.set(response.requestToken, forKey: "requestToken")
+                Auth.reqestToken = response.requestToken
                 completionHandler(true, nil)
-                
-            } catch {
-                completionHandler(false, error)
+            } else {
+                completionHandler(false, nil)
             }
         }
-        task.resume()
     }
     
     class func createSessionId(completionHandler: @escaping (Bool, Error?) -> Void) {
-        
-        var request = URLRequest(url: EndPoints.createSessionId.url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let body = PostSession(requestToken: Auth.reqestToken)
-        request.httpBody = try! JSONEncoder().encode(body)
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                completionHandler(false, error)
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let responseObject = try decoder.decode(SessionResponse.self, from: data)
-                UserDefaults.standard.set(responseObject.sessionId, forKey: "sessionId")
-                Auth.sessionId = responseObject.sessionId
+        taskForPOSTRequest(url: EndPoints.createSessionId.url, response: SessionResponse.self, body: body) { (response, error) in
+            if let response = response {
+                UserDefaults.standard.set(response.sessionId, forKey: "sessionId")
+                Auth.sessionId = response.sessionId
                 completionHandler(true, nil)
-                
-            } catch {
-                completionHandler(false, error)
             }
         }
-        task.resume()
     }
     
     
@@ -206,20 +206,20 @@ class TMDBClient {
         
     }
     
-    class func getMoviesNowPlaying(completionHandler: @escaping (MoviesNowPlayingRequest?, Error?) -> Void) {
+    class func getMoviesNowPlaying(completionHandler: @escaping ([Movie], Error?) -> Void) {
         
-        taskForGETRequest(url: EndPoints.nowPlaying.url, response: MoviesNowPlayingRequest.self) { (response, error) in
+        taskForGETRequest(url: EndPoints.nowPlaying.url, response: MovieResults.self) { (response, error) in
             if let response = response {
-                completionHandler(response, nil)
+                completionHandler(response.results, nil)
             } else {
-                completionHandler(nil, error)
+                completionHandler([], error)
             }
         }
         
     }
     
-    class func getPoster(completionHandler: @escaping (UIImage?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndPoints.posterPath.url) { (data, response, error) in
+    class func getPoster(poster: String, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: EndPoints.posterPath(poster).url) { (data, response, error) in
             guard let data = data else {
                 completionHandler(nil, error)
                 return
@@ -242,6 +242,16 @@ class TMDBClient {
             completionHandler(gravatar, nil)
         }
         task.resume()
+    }
+    
+    class func search(query: String, completionHandler: @escaping ([Movie], Error?) -> Void) {
+        taskForGETRequest(url: EndPoints.search(query).url, response: MovieResults.self) { (response, error) in
+            if let response = response {
+                completionHandler(response.results, nil)
+            } else {
+                completionHandler([], error)
+            }
+        }
     }
     
     class func logout(completion: @escaping () -> Void) {
