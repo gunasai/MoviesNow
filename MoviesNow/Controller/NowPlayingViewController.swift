@@ -16,11 +16,7 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
     var movies = [Movie]()
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var moviesNowPlaying = ["End Game", "Dark Knight", "Spider Man"]
-    let moviePosters = ["e1mjopzAS2KNsvpbpahQ1a6SkSn", "e1mjopzAS2KNsvpbpahQ1a6SkSn", "e1mjopzAS2KNsvpbpahQ1a6SkSn"]
-    
-    let movieDescription = ["Awesome", "Legendary", "Boooo"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         TMDBClient.getMoviesNowPlaying { (movies, error) in

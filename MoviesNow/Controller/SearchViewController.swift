@@ -17,6 +17,17 @@ class  SearchViewController: UIViewController {
     
     var selectedIndex = 0
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpNavBar()
+    }
+    
+    func setUpNavBar() {
+        navigationController?.navigationBar.topItem?.title = "Search"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.view.backgroundColor = UIColor.white
+    }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -54,6 +65,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell")!
+        
+        cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
         
         let movie = movies[indexPath.row]
         
