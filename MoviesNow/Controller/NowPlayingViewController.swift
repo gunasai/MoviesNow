@@ -24,6 +24,8 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
             self.collectionView.reloadData()
         }
         
+        MovieSingleton.shared.setMovies()
+        
         setUpNavBar()
     }
     
@@ -64,6 +66,15 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
         cell.movieDescription.text = movies[indexPath.row].overview
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // navigating to detail view
+        let detailController = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
+        detailController.movieName = movies[indexPath.row].originalTitle
+        detailController.movieSynopsis = movies[indexPath.row].overview
+        detailController.backdropPath = movies[indexPath.row].backdropPath
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     
 }
