@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: JVFloatLabeledTextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginViaWebsiteButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
@@ -40,10 +41,12 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginTapped(_ sender: Any) {
+        setLoggingIn(true)
         TMDBClient.getRequestToken(completionHandler: handleRequestTokenResponse(success:error:))
     }
     
     @IBAction func loginViaWebsiteTapped(_ sender: Any) {
+        setLoggingIn(true)
         TMDBClient.getRequestToken { (success, error) in
             if success {
                 UIApplication.shared.open(TMDBClient.EndPoints.webAuth.url, options: [:], completionHandler: nil)
@@ -73,6 +76,7 @@ class LoginViewController: UIViewController {
     // MARK: Completion Handlers
     
     func handleRequestTokenResponse(success: Bool, error: Error?) {
+        setLoggingIn(false)
         if success {
             print(TMDBClient.Auth.reqestToken)
             print(self.usernameTextField.text ?? "")
@@ -80,6 +84,8 @@ class LoginViewController: UIViewController {
                 self.usernameTextField.text ?? "", password:
                 self.passwordTextField.text ?? "", completionHandler:
                 self.handleLoginResponse(success:error:))
+        } else {
+            showLoginFailure(message: error?.localizedDescription ?? "")
         }
     }
     
@@ -88,6 +94,8 @@ class LoginViewController: UIViewController {
         if success {
             UserDefaults.standard.set(true, forKey: "isLoggedIn")
             TMDBClient.createSessionId(completionHandler: handleSessionResponse(success:error:))
+        } else {
+            showLoginFailure(message: error?.localizedDescription ?? "")
         }
     }
     
@@ -97,6 +105,25 @@ class LoginViewController: UIViewController {
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
         }
     }
+    
+    func setLoggingIn(_ loggingIn: Bool) {
+        if loggingIn {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        usernameTextField.isEnabled = !loggingIn
+        passwordTextField.isEnabled = !loggingIn
+        loginButton.isEnabled = !loggingIn
+        loginViaWebsiteButton.isEnabled = !loggingIn
+    }
+    
+    func showLoginFailure(message: String) {
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
+    }
+
     
 }
 

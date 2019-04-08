@@ -115,9 +115,17 @@ class TMDBClient {
                     completionHandler(responseObject, nil)
                 }
             } catch {
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
+                do {
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        completionHandler(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
                 }
+               
             }
         }
         task.resume()
@@ -143,8 +151,15 @@ class TMDBClient {
                     completionHandler(responseObject, nil)
                 }
             } catch {
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
+                do {
+                    let errorResponse = try decoder.decode(TMDBResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        completionHandler(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
                 }
             }
         }
