@@ -11,17 +11,19 @@ import Foundation
 class MovieSingleton {
     static let shared = MovieSingleton()
     
-    var movies = [Movie]()
+    var movies = [String]()
     
     private init() {}
     
-    func getMovies() -> [Movie] {
+    func getMovies() -> [String] {
         return movies
     }
     
     func setMovies() {
         TMDBClient.getMoviesNowPlaying { (moviesNowPlaying, error) in
-           self.movies = moviesNowPlaying
+            for movie in moviesNowPlaying {
+                self.movies.append(movie.originalTitle)
+            }
         }
     }
 }

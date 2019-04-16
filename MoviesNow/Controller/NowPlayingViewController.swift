@@ -72,6 +72,7 @@ class NowPlayingViewController: UIViewController, UICollectionViewDataSource, UI
         // navigating to detail view
         let detailController = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
         detailController.movieName = movies[indexPath.row].originalTitle
+        detailController.movieID = movies[indexPath.row].id
         detailController.movieSynopsis = movies[indexPath.row].overview
         detailController.backdropPath = movies[indexPath.row].backdropPath
         self.navigationController?.pushViewController(detailController, animated: true)

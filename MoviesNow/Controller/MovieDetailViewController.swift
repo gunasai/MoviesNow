@@ -13,10 +13,29 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieDescription: UITextView!
     @IBOutlet weak var bookingButton: UIButton!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var backdropPath: String?
     var movieName: String?
     var movieSynopsis: String?
+    var movieID: Int?
+    
+    @IBOutlet weak var watchListBarButton: UIBarButtonItem!
+    @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
+    
+    var isWatchlist: Bool {
+        return MovieModel.watchlist.contains(movieID!)
+    }
+    
+    var isFavorite: Bool {
+        return MovieModel.favorites.contains(movieID!)
+    }
+    
+    
+    @IBAction func bookTickets(_ sender: Any) {
+        let seatSelectionController = self.storyboard?.instantiateViewController(withIdentifier: "SeatCollectionViewController") as! SeatCollectionViewController
+        self.navigationController?.pushViewController(seatSelectionController, animated: true)
+    }
     
     // setting the image and hiding the tab bar
     override func viewWillAppear(_ animated: Bool) {
@@ -37,25 +56,56 @@ class MovieDetailViewController: UIViewController {
         
     }
     
+    @IBAction func watchListButtonTapped(_ sender: UIBarButtonItem) {
+        TMDBClient.markWatchlist(movieID: movieID!, watchlist: !isWatchlist, completion: handleWatchlistResponse(success:error:))
+        print("ID: \(movieID!)")
+        print("WATCHLIST: \(MovieModel.watchlist)")
+    }
+    
+    func handleWatchlistResponse(success: Bool, error: Error?) {
+        if success {
+            if isWatchlist {
+                print("before delete: \(MovieModel.watchlist.count)")
+                MovieModel.watchlist = MovieModel.watchlist.filter() {$0 != movieID!}
+                print("after delete: \(MovieModel.watchlist.count)")
+            } else {
+                MovieModel.watchlist.append(movieID!)
+            }
+            toggleBarButton(watchListBarButton, enabled: isWatchlist)
+        }
+    }
+    
+    @IBAction func favoriteButtonTapped(_ sender: UIBarButtonItem) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moviePoster.clipsToBounds = true
         moviePoster.layer.masksToBounds = true
-        moviePoster.layer.cornerRadius = CGFloat(10)
+        moviePoster.layer.cornerRadius = 20
         bookingButton.layer.cornerRadius = 5
+        toolbar.clipsToBounds = true
         
-        // Do any additional setup after loading the view.
+        
+        // Checking if users can book tickets.
+        let movieSingleton = MovieSingleton.shared.getMovies()
+        if !movieSingleton.contains(movieName ?? "") {
+            bookingButton.isHidden = true
+        }
+        
+        if MovieModel.watchlist.contains(movieID!) {
+            watchListBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
+        } else {
+            watchListBarButton.tintColor = UIColor.darkGray
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func toggleBarButton(_ button: UIBarButtonItem, enabled: Bool) {
+        if enabled {
+            button.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
+        } else {
+            button.tintColor = UIColor.darkGray
+        }
     }
-    */
 
 }

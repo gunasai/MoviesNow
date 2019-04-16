@@ -25,7 +25,7 @@ class  SearchViewController: UIViewController {
     func setUpNavBar() {
         navigationController?.navigationBar.topItem?.title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.view.backgroundColor = UIColor.white
+        
     }
     
 }
@@ -65,16 +65,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell")!
-        
-        cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
-        
         let movie = movies[indexPath.row]
-        
         cell.textLabel?.text = "\(movie.title) - \(movie.releaseYear)"
-        
         return cell
         
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // navigating to detail view
+        let detailController = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailViewController") as! MovieDetailViewController
+        detailController.movieName = movies[indexPath.row].originalTitle
+        detailController.movieSynopsis = movies[indexPath.row].overview
+        detailController.backdropPath = movies[indexPath.row].backdropPath
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     
     

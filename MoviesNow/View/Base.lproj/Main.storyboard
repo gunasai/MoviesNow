@@ -271,8 +271,27 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHj-NC-bO7">
+                                        <rect key="frame" x="0.0" y="56" width="343" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="fxi-6e-bmH"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem systemItem="organize" id="ztg-6V-oEx">
+                                                <connections>
+                                                    <action selector="watchListButtonTapped:" destination="hb1-i4-xqz" id="s9a-Iu-sgK"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="ltA-Y3-4qb"/>
+                                            <barButtonItem title="Item" image="Favorite" style="plain" id="zDb-Fd-LZr">
+                                                <connections>
+                                                    <action selector="favoriteButtonTapped:" destination="hb1-i4-xqz" id="Vt5-kt-Ugl"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8F6-Dy-ntz">
-                                        <rect key="frame" x="0.0" y="52" width="343" height="283"/>
+                                        <rect key="frame" x="0.0" y="105" width="343" height="226"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="343" id="A10-bO-78T"/>
@@ -287,6 +306,9 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Book Tickets"/>
+                                        <connections>
+                                            <action selector="bookTickets:" destination="hb1-i4-xqz" eventType="touchUpInside" id="R6r-8X-o1F"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -294,8 +316,8 @@
                                     <constraint firstAttribute="trailing" secondItem="8F6-Dy-ntz" secondAttribute="trailing" id="5fo-N1-I2v"/>
                                     <constraint firstAttribute="bottom" secondItem="D31-ba-N9a" secondAttribute="bottom" id="KK7-cW-rpF"/>
                                     <constraint firstItem="8F6-Dy-ntz" firstAttribute="leading" secondItem="U5V-9n-obx" secondAttribute="leading" id="UG4-Yz-bbZ"/>
+                                    <constraint firstItem="KHj-NC-bO7" firstAttribute="top" secondItem="zkg-my-Tre" secondAttribute="bottom" constant="20" id="chM-dM-1Zb"/>
                                     <constraint firstAttribute="trailing" secondItem="D31-ba-N9a" secondAttribute="trailing" id="e3B-vb-1wv"/>
-                                    <constraint firstItem="8F6-Dy-ntz" firstAttribute="top" secondItem="zkg-my-Tre" secondAttribute="bottom" constant="16" id="vVq-CI-j2E"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -313,14 +335,32 @@
                     </view>
                     <connections>
                         <outlet property="bookingButton" destination="D31-ba-N9a" id="qW2-Oa-0f5"/>
+                        <outlet property="favoriteBarButton" destination="zDb-Fd-LZr" id="FwC-KH-t8g"/>
                         <outlet property="movieDescription" destination="8F6-Dy-ntz" id="rlO-Hj-8Jn"/>
                         <outlet property="moviePoster" destination="gns-4E-MMe" id="Ws6-Kh-xnv"/>
                         <outlet property="movieTitle" destination="zkg-my-Tre" id="s9j-os-m5q"/>
+                        <outlet property="toolbar" destination="KHj-NC-bO7" id="Acd-S7-XAb"/>
+                        <outlet property="watchListBarButton" destination="ztg-6V-oEx" id="QwR-Sd-YzI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="371-KK-0AD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3837.5999999999999" y="-671.51424287856082"/>
+        </scene>
+        <!--Seat Collection View Controller-->
+        <scene sceneID="Hf4-ba-eid">
+            <objects>
+                <viewController storyboardIdentifier="SeatCollectionViewController" id="d4z-QL-1i4" customClass="SeatCollectionViewController" customModule="MoviesNow" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z78-kF-zBh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="KKT-Xk-e1g"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cFl-6t-1Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4556" y="-672"/>
         </scene>
         <!--Item-->
         <scene sceneID="7ia-tK-AwM">
@@ -497,6 +537,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Favorite" width="32" height="32"/>
         <image name="Genre" width="30" height="30"/>
         <image name="tv" width="512" height="512"/>
     </resources>

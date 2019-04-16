@@ -33,6 +33,7 @@ class TMDBClient {
         case posterPath(String)
         case logout
         case search(String)
+        case markWatchlist
         
         
         var stringValue: String {
@@ -88,7 +89,8 @@ class TMDBClient {
                 case .search(let query):
                     return EndPoints.base + "/search/movie" + EndPoints.apiKeyParam + "&query=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""))"
                 
-                
+                case .markWatchlist:
+                    return EndPoints.base + "/account/\(Auth.accountId)/watchlist" + EndPoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
             }
                 
         }
@@ -265,6 +267,17 @@ class TMDBClient {
                 completionHandler(response.results, nil)
             } else {
                 completionHandler([], error)
+            }
+        }
+    }
+    
+    class func markWatchlist(movieID: Int, watchlist: Bool, completion: @escaping (Bool, Error?) -> Void) {
+        let body = MarkWatchlist(mediaType: "movie", mediaId: movieID, watchlist: watchlist)
+        taskForPOSTRequest(url: EndPoints.markWatchlist.url, response: TMDBResponse.self, body: body) { (response, error) in
+            if let response = response {
+                completion(response.statusCode == 1 || response.statusCode == 12 || response.statusCode == 13, nil)
+            } else {
+                completion(false, error)
             }
         }
     }
