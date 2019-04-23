@@ -75,7 +75,21 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    func handleFavoriteResponse(success: Bool, error: Error?) {
+        if success {
+            if isFavorite {
+                print("before delete: \(MovieModel.favorites.count)")
+                MovieModel.watchlist = MovieModel.favorites.filter() {$0 != movieID!}
+                print("after delete: \(MovieModel.favorites.count)")
+            } else {
+                MovieModel.favorites.append(movieID!)
+            }
+            toggleBarButton(favoriteBarButton, enabled: isFavorite)
+        }
+    }
+    
     @IBAction func favoriteButtonTapped(_ sender: UIBarButtonItem) {
+        TMDBClient.markFavorite(movieId: movieID!, favorite: !isFavorite, completion: handleFavoriteResponse(success:error:))
     }
     
     override func viewDidLoad() {
@@ -97,6 +111,12 @@ class MovieDetailViewController: UIViewController {
             watchListBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
         } else {
             watchListBarButton.tintColor = UIColor.darkGray
+        }
+        
+        if MovieModel.favorites.contains(movieID!) {
+            favoriteBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
+        } else {
+            favoriteBarButton.tintColor = UIColor.darkGray
         }
     }
     

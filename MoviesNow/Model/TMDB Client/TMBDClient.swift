@@ -34,6 +34,9 @@ class TMDBClient {
         case logout
         case search(String)
         case markWatchlist
+        case markFavorite
+        case getWatchlist
+        case getFavorites
         
         
         var stringValue: String {
@@ -91,6 +94,14 @@ class TMDBClient {
                 
                 case .markWatchlist:
                     return EndPoints.base + "/account/\(Auth.accountId)/watchlist" + EndPoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+                
+                case .markFavorite:
+                    return EndPoints.base + "/account/\(Auth.accountId)/favorite" + EndPoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+                
+            case .getWatchlist: return EndPoints.base + "/account/\(Auth.accountId)/watchlist/movies" + EndPoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
+                
+                case .getFavorites:
+                    return EndPoints.base + "/account/\(Auth.accountId)/favorite/movies" + EndPoints.apiKeyParam + "&session_id=\(Auth.sessionId)"
             }
                 
         }
@@ -278,6 +289,37 @@ class TMDBClient {
                 completion(response.statusCode == 1 || response.statusCode == 12 || response.statusCode == 13, nil)
             } else {
                 completion(false, error)
+            }
+        }
+    }
+    
+    class func markFavorite(movieId: Int, favorite: Bool, completion: @escaping (Bool, Error?) -> Void) {
+        let body = MarkFavorite(mediaType: "movie", mediaId: movieId, favorite: favorite)
+        taskForPOSTRequest(url: EndPoints.markFavorite.url, response: TMDBResponse.self, body: body) { response, error in
+            if let response = response {
+                completion(response.statusCode == 1 || response.statusCode == 12 || response.statusCode == 13, nil)
+            } else {
+                completion(false, nil)
+            }
+        }
+    }
+    
+    class func getWatchlist(completion: @escaping ([Movie], Error?) -> Void) {
+        taskForGETRequest(url: EndPoints.getWatchlist.url, response: MovieResults.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
+    
+    class func getFavorites(completion: @escaping ([Movie], Error?) -> Void) {
+        taskForGETRequest(url: EndPoints.getFavorites.url, response: MovieResults.self) { response, error in
+            if let response = response {
+                completion(response.results, nil)
+            } else {
+                completion([], error)
             }
         }
     }
