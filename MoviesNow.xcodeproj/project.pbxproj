@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8AA47D3939FAB918EB77662B /* Pods_MoviesNow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4068AE642FBBA53A41425B /* Pods_MoviesNow.framework */; };
 		B01173932266725600AE316D /* MarkFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01173922266725600AE316D /* MarkFavorite.swift */; };
+		B02703552277928B008AE61C /* UserBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02703542277928B008AE61C /* UserBooking.swift */; };
+		B027035722779EDC008AE61C /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035622779EDC008AE61C /* CheckoutViewController.swift */; };
+		B027035922779F89008AE61C /* SeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035822779F89008AE61C /* SeatTableViewCell.swift */; };
+		B027035B2277A017008AE61C /* CheckoutTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035A2277A017008AE61C /* CheckoutTotalTableViewCell.swift */; };
 		B02957BB22260C63001ADB23 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02957BA22260C63001ADB23 /* Movie.swift */; };
 		B02957BD22260C7F001ADB23 /* MovieResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02957BC22260C7F001ADB23 /* MovieResults.swift */; };
 		B039B76F220A605600C91991 /* TMBDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039B76E220A605600C91991 /* TMBDClient.swift */; };
@@ -40,12 +44,17 @@
 		B0A7AF9422288F2A004A47CF /* MovieSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A7AF9322288F2A004A47CF /* MovieSingleton.swift */; };
 		B0BCC811220BB85900EC8DAC /* KeyboardNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BCC810220BB85900EC8DAC /* KeyboardNotifications.swift */; };
 		B0C42C72225AD23F00843B39 /* TMDBResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C42C71225AD23F00843B39 /* TMDBResponse.swift */; };
+		B0D901EE226FA545002736CA /* CheckoutButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D901ED226FA545002736CA /* CheckoutButtonCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B4068AE642FBBA53A41425B /* Pods_MoviesNow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoviesNow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		233969D7E6EDE48DB4178E75 /* Pods-MoviesNow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesNow.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesNow/Pods-MoviesNow.release.xcconfig"; sourceTree = "<group>"; };
 		B01173922266725600AE316D /* MarkFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkFavorite.swift; sourceTree = "<group>"; };
+		B02703542277928B008AE61C /* UserBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBooking.swift; sourceTree = "<group>"; };
+		B027035622779EDC008AE61C /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		B027035822779F89008AE61C /* SeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatTableViewCell.swift; sourceTree = "<group>"; };
+		B027035A2277A017008AE61C /* CheckoutTotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTotalTableViewCell.swift; sourceTree = "<group>"; };
 		B02957BA22260C63001ADB23 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B02957BC22260C7F001ADB23 /* MovieResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResults.swift; sourceTree = "<group>"; };
 		B039B76E220A605600C91991 /* TMBDClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBDClient.swift; sourceTree = "<group>"; };
@@ -79,6 +88,7 @@
 		B0A7AF9322288F2A004A47CF /* MovieSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSingleton.swift; sourceTree = "<group>"; };
 		B0BCC810220BB85900EC8DAC /* KeyboardNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotifications.swift; sourceTree = "<group>"; };
 		B0C42C71225AD23F00843B39 /* TMDBResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBResponse.swift; sourceTree = "<group>"; };
+		B0D901ED226FA545002736CA /* CheckoutButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutButtonCell.swift; sourceTree = "<group>"; };
 		C534EDD7F4AA83EFB2DA2D49 /* Pods-MoviesNow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoviesNow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoviesNow/Pods-MoviesNow.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +151,7 @@
 				B05B585A220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift */,
 				B04E40942265535300A7AE5D /* MarkWatchlist.swift */,
 				B01173922266725600AE316D /* MarkFavorite.swift */,
+				B02703542277928B008AE61C /* UserBooking.swift */,
 			);
 			path = "TMDB Requests";
 			sourceTree = "<group>";
@@ -187,6 +198,9 @@
 				B0883FDA2263FAA900253F37 /* SeatCell.swift */,
 				B0883FDC2264033F00253F37 /* MovieScreenHeader.swift */,
 				B03C90D1226E868400AB48F6 /* UIView+Layout.swift */,
+				B0D901ED226FA545002736CA /* CheckoutButtonCell.swift */,
+				B027035822779F89008AE61C /* SeatTableViewCell.swift */,
+				B027035A2277A017008AE61C /* CheckoutTotalTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +215,7 @@
 				B0A7523A22529ECF001B611E /* MovieDetailViewController.swift */,
 				B0883FD82263F30B00253F37 /* SeatCollectionViewController.swift */,
 				B03C90CF226E640E00AB48F6 /* Watchlist+FavoritesViewController.swift */,
+				B027035622779EDC008AE61C /* CheckoutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -353,6 +368,8 @@
 				B0883FD92263F30B00253F37 /* SeatCollectionViewController.swift in Sources */,
 				B0883FDD2264033F00253F37 /* MovieScreenHeader.swift in Sources */,
 				B03F3B74220A2348008B6D7C /* LoginViewController.swift in Sources */,
+				B0D901EE226FA545002736CA /* CheckoutButtonCell.swift in Sources */,
+				B027035B2277A017008AE61C /* CheckoutTotalTableViewCell.swift in Sources */,
 				B078F1E5220CE10D005EFD71 /* AccountDetailsRequest.swift in Sources */,
 				B04E409822655EA600A7AE5D /* MovieModel.swift in Sources */,
 				B04E40952265535300A7AE5D /* MarkWatchlist.swift in Sources */,
@@ -363,10 +380,12 @@
 				B02957BB22260C63001ADB23 /* Movie.swift in Sources */,
 				B039B772220A63BD00C91991 /* RequestTokenResponse.swift in Sources */,
 				B039B77B220A7E6B00C91991 /* SessionResponse.swift in Sources */,
+				B027035722779EDC008AE61C /* CheckoutViewController.swift in Sources */,
 				B06E33D42214D99E00E64228 /* MoviesNowPlayingCellCollectionViewCell.swift in Sources */,
 				B02957BD22260C7F001ADB23 /* MovieResults.swift in Sources */,
 				B039B777220A77A000C91991 /* LoginRequest.swift in Sources */,
 				B0461851222612C800CA947C /* SearchViewController.swift in Sources */,
+				B027035922779F89008AE61C /* SeatTableViewCell.swift in Sources */,
 				B03C90D0226E640E00AB48F6 /* Watchlist+FavoritesViewController.swift in Sources */,
 				B05B585B220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift in Sources */,
 				B01173932266725600AE316D /* MarkFavorite.swift in Sources */,
@@ -376,6 +395,7 @@
 				B0A7523B22529ECF001B611E /* MovieDetailViewController.swift in Sources */,
 				B0A7AF9422288F2A004A47CF /* MovieSingleton.swift in Sources */,
 				B039B774220A713300C91991 /* CustomTextField.swift in Sources */,
+				B02703552277928B008AE61C /* UserBooking.swift in Sources */,
 				B078F1E7220CEABA005EFD71 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

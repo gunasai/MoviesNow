@@ -118,6 +118,8 @@ class MovieDetailViewController: UIViewController {
         } else {
             favoriteBarButton.tintColor = UIColor.darkGray
         }
+        
+        UserDefaults.standard.set(movieID, forKey: "MovieID")
     }
     
     func toggleBarButton(_ button: UIBarButtonItem, enabled: Bool) {
