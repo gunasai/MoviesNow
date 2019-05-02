@@ -8,5 +8,10 @@ target 'MoviesNow' do
   # Pods for MoviesNow
   pod 'JVFloatLabeledTextField'
   pod 'MaterialComponents/Cards'
+  pod 'Alamofire', '~> 4.5'
+  pod 'AlamofireImage', '~> 3.3'
+  pod 'Stripe'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
 end

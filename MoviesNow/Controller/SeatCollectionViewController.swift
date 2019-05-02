@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class SeatCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionview: UICollectionView!
+    var movieID: Int = 0
     fileprivate let cellID = "SeatCell"
     fileprivate let headerID = "MovieHeader"
     
     let numbers = ["1A", "2A", "3A", "4B", "5B", "6B", "7C", "8C", "9C", "10D",  "11D", "12D"]
     
     var bookedSeats = [String]()
+    var seatsAlreadybooked = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,40 @@ class SeatCollectionViewController: UIViewController, UICollectionViewDataSource
         checkoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         checkoutButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -120).isActive = true
         
+        let ref = Database.database().reference()
+        
+        ref.child("movieDetails").observeSingleEvent(of: .value, with:
+            { (snapshot) in
+                if snapshot.hasChild((String(self.movieID))) {
+                    print("Movie already exists")
+                    ref.child("movieDetails/\(self.movieID)/seatsSelected").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let seatsSelected = snapshot.value as! [String]
+                        print("SEATS BEFORE APPEND: \(seatsSelected)")
+                        
+                        DispatchQueue.main.async {
+                            
+                            for seat in seatsSelected {
+                                self.seatsAlreadybooked.append(seat)
+                            }
+                            
+                            self.collectionview.reloadData()
+                            
+                            print("Seats AFTER APPEND: \(self.seatsAlreadybooked)")
+                        }
+                        
+                    })
+                    
+                }
+                else {
+                    _ = ref.child("movieDetails/\(self.movieID)").child("seatsSelected")
+//                    seatsSelectedRef.setValue(self.bookedSeats)
+                }
+                
+        })
+        
+        
     }
+
 
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,8 +123,12 @@ class SeatCollectionViewController: UIViewController, UICollectionViewDataSource
 //        print("cell LABEL: \(numbers[indexPath.item])")
         let seat = numbers[indexPath.item]
         
-        if bookedSeats.contains(seat) {
+        
+        if seatsAlreadybooked.contains(seat) {
+            print("SEAT ALREADY BOOKED")
             cell.isUserInteractionEnabled = false
+            cell.isOpaque = true
+            cell.backgroundColor = UIColor(white: 0.9, alpha: 1)
         }
         
         
@@ -97,13 +137,13 @@ class SeatCollectionViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .yellow
+        cell?.backgroundColor = UIColor(red: 0.9882, green: 0.8706, blue: 0, alpha: 1.0)
         bookedSeats.append(numbers[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        cell?.backgroundColor = UIColor(red: 0.298, green: 0.8196, blue: 0, alpha: 1.0)
         
         bookedSeats = bookedSeats.filter() {$0 != numbers[indexPath.row]}
         

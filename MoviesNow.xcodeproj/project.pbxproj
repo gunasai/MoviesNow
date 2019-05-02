@@ -13,6 +13,9 @@
 		B027035722779EDC008AE61C /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035622779EDC008AE61C /* CheckoutViewController.swift */; };
 		B027035922779F89008AE61C /* SeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035822779F89008AE61C /* SeatTableViewCell.swift */; };
 		B027035B2277A017008AE61C /* CheckoutTotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035A2277A017008AE61C /* CheckoutTotalTableViewCell.swift */; };
+		B027035D2277B551008AE61C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035C2277B551008AE61C /* Constants.swift */; };
+		B02703602277B6BA008AE61C /* StripeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B027035F2277B6BA008AE61C /* StripeClient.swift */; };
+		B02703622277BF29008AE61C /* NumberFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02703612277BF29008AE61C /* NumberFormat.swift */; };
 		B02957BB22260C63001ADB23 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02957BA22260C63001ADB23 /* Movie.swift */; };
 		B02957BD22260C7F001ADB23 /* MovieResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02957BC22260C7F001ADB23 /* MovieResults.swift */; };
 		B039B76F220A605600C91991 /* TMBDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039B76E220A605600C91991 /* TMBDClient.swift */; };
@@ -33,6 +36,7 @@
 		B04E409822655EA600A7AE5D /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E409722655EA600A7AE5D /* MovieModel.swift */; };
 		B05B585B220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05B585A220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift */; };
 		B05B585D220F9484001ABD08 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05B585C220F9484001ABD08 /* NowPlayingViewController.swift */; };
+		B06B3FD1227906E200C16FC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B06B3FD0227906E200C16FC1 /* GoogleService-Info.plist */; };
 		B06E33D42214D99E00E64228 /* MoviesNowPlayingCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E33D32214D99E00E64228 /* MoviesNowPlayingCellCollectionViewCell.swift */; };
 		B078F1E5220CE10D005EFD71 /* AccountDetailsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B078F1E4220CE10D005EFD71 /* AccountDetailsRequest.swift */; };
 		B078F1E7220CEABA005EFD71 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B078F1E6220CEABA005EFD71 /* AccountViewController.swift */; };
@@ -55,6 +59,9 @@
 		B027035622779EDC008AE61C /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		B027035822779F89008AE61C /* SeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeatTableViewCell.swift; sourceTree = "<group>"; };
 		B027035A2277A017008AE61C /* CheckoutTotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutTotalTableViewCell.swift; sourceTree = "<group>"; };
+		B027035C2277B551008AE61C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B027035F2277B6BA008AE61C /* StripeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeClient.swift; sourceTree = "<group>"; };
+		B02703612277BF29008AE61C /* NumberFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormat.swift; sourceTree = "<group>"; };
 		B02957BA22260C63001ADB23 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B02957BC22260C7F001ADB23 /* MovieResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResults.swift; sourceTree = "<group>"; };
 		B039B76E220A605600C91991 /* TMBDClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMBDClient.swift; sourceTree = "<group>"; };
@@ -77,6 +84,7 @@
 		B04E409722655EA600A7AE5D /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		B05B585A220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesNowPlayingRequest.swift; sourceTree = "<group>"; };
 		B05B585C220F9484001ABD08 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
+		B06B3FD0227906E200C16FC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B06E33D32214D99E00E64228 /* MoviesNowPlayingCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesNowPlayingCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		B078F1E4220CE10D005EFD71 /* AccountDetailsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsRequest.swift; sourceTree = "<group>"; };
 		B078F1E6220CEABA005EFD71 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +127,14 @@
 				0B4068AE642FBBA53A41425B /* Pods_MoviesNow.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B027035E2277B6A3008AE61C /* Stripe Client */ = {
+			isa = PBXGroup;
+			children = (
+				B027035F2277B6BA008AE61C /* StripeClient.swift */,
+			);
+			path = "Stripe Client";
 			sourceTree = "<group>";
 		};
 		B039B76D220A603C00C91991 /* TMDB Client */ = {
@@ -177,6 +193,7 @@
 		B03F3B70220A2348008B6D7C /* MoviesNow */ = {
 			isa = PBXGroup;
 			children = (
+				B06B3FD0227906E200C16FC1 /* GoogleService-Info.plist */,
 				B03F3B7D220A234A008B6D7C /* Info.plist */,
 				B03F3B71220A2348008B6D7C /* AppDelegate.swift */,
 				B03F3B85220A24F8008B6D7C /* Model */,
@@ -224,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				B04E409622655E9300A7AE5D /* Data */,
+				B027035E2277B6A3008AE61C /* Stripe Client */,
 				B039B76D220A603C00C91991 /* TMDB Client */,
 				B039B775220A778A00C91991 /* TMDB Requests */,
 				B039B770220A63A300C91991 /* TMDB Responses */,
@@ -236,6 +254,8 @@
 			children = (
 				B0A7AF9322288F2A004A47CF /* MovieSingleton.swift */,
 				B04E409722655EA600A7AE5D /* MovieModel.swift */,
+				B027035C2277B551008AE61C /* Constants.swift */,
+				B02703612277BF29008AE61C /* NumberFormat.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -302,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B03F3B7C220A234A008B6D7C /* LaunchScreen.storyboard in Resources */,
+				B06B3FD1227906E200C16FC1 /* GoogleService-Info.plist in Resources */,
 				B03F3B79220A234A008B6D7C /* Assets.xcassets in Resources */,
 				B03F3B77220A2348008B6D7C /* Main.storyboard in Resources */,
 			);
@@ -319,15 +340,27 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MoviesNow/Pods-MoviesNow-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -377,17 +410,20 @@
 				B0883FDB2263FAA900253F37 /* SeatCell.swift in Sources */,
 				B03C90D2226E868400AB48F6 /* UIView+Layout.swift in Sources */,
 				B03F3B72220A2348008B6D7C /* AppDelegate.swift in Sources */,
+				B02703622277BF29008AE61C /* NumberFormat.swift in Sources */,
 				B02957BB22260C63001ADB23 /* Movie.swift in Sources */,
 				B039B772220A63BD00C91991 /* RequestTokenResponse.swift in Sources */,
 				B039B77B220A7E6B00C91991 /* SessionResponse.swift in Sources */,
 				B027035722779EDC008AE61C /* CheckoutViewController.swift in Sources */,
 				B06E33D42214D99E00E64228 /* MoviesNowPlayingCellCollectionViewCell.swift in Sources */,
+				B02703602277B6BA008AE61C /* StripeClient.swift in Sources */,
 				B02957BD22260C7F001ADB23 /* MovieResults.swift in Sources */,
 				B039B777220A77A000C91991 /* LoginRequest.swift in Sources */,
 				B0461851222612C800CA947C /* SearchViewController.swift in Sources */,
 				B027035922779F89008AE61C /* SeatTableViewCell.swift in Sources */,
 				B03C90D0226E640E00AB48F6 /* Watchlist+FavoritesViewController.swift in Sources */,
 				B05B585B220F8FD1001ABD08 /* MoviesNowPlayingRequest.swift in Sources */,
+				B027035D2277B551008AE61C /* Constants.swift in Sources */,
 				B01173932266725600AE316D /* MarkFavorite.swift in Sources */,
 				B039B76F220A605600C91991 /* TMBDClient.swift in Sources */,
 				B039B779220A7E1F00C91991 /* PostSession.swift in Sources */,

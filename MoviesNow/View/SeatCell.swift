@@ -31,7 +31,7 @@ class SeatCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(white: 0.9, alpha: 1)
+        backgroundColor = UIColor(red: 0.298, green: 0.8196, blue: 0, alpha: 1.0)
         
         let stackView = UIStackView(arrangedSubviews: [seatLabel])
         stackView.axis = .vertical

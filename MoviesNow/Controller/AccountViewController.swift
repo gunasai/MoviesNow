@@ -36,6 +36,7 @@ class AccountViewController: UIViewController {
     func handleAccountDetailsResponse(accountDetails: AccountDetailsRequest?, error: Error?) {
         if let accountDetails = accountDetails {
             print("AccountID: \(accountDetails.id)")
+            UserDefaults.standard.set(accountDetails.id, forKey: "AccountID")
             TMDBClient.getGravatar(hash: accountDetails.avatar.gravatar.hash, completionHandler: handleImageResponse(gravatar:error:))
             DispatchQueue.main.async {
                 self.nameLabel.text = "Welcome \(accountDetails.username)!"

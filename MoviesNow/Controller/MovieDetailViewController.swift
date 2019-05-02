@@ -34,6 +34,7 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func bookTickets(_ sender: Any) {
         let seatSelectionController = self.storyboard?.instantiateViewController(withIdentifier: "SeatCollectionViewController") as! SeatCollectionViewController
+        seatSelectionController.movieID = self.movieID ?? 0
         self.navigationController?.pushViewController(seatSelectionController, animated: true)
     }
     
@@ -94,9 +95,9 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        moviePoster.layer.cornerRadius = 5
         moviePoster.clipsToBounds = true
         moviePoster.layer.masksToBounds = true
-        moviePoster.layer.cornerRadius = 20
         bookingButton.layer.cornerRadius = 5
         toolbar.clipsToBounds = true
         

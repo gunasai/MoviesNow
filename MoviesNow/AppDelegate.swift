@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Stripe
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             [NSAttributedString.Key.foregroundColor: UIColor.white]
 
 
+        STPPaymentConfiguration.shared().publishableKey = Constants.publishableKey
+        FirebaseApp.configure()
 
         return true
     }
