@@ -20,6 +20,10 @@ class WatchlistFavoritesViewController: UIViewController, UITableViewDataSource,
         return sc
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     @objc fileprivate func handleSegmentChange() {
         print(segmentedControl.selectedSegmentIndex)
         
@@ -97,6 +101,7 @@ class WatchlistFavoritesViewController: UIViewController, UITableViewDataSource,
         
         
     }
+    
     
     func setUpNavBar() {
         navigationController?.navigationBar.topItem?.title = "Favorites"

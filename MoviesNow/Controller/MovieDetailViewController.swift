@@ -23,6 +23,9 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var watchListBarButton: UIBarButtonItem!
     @IBOutlet weak var favoriteBarButton: UIBarButtonItem!
     
+    var watchlistMovies = [Movie]()
+    var favoriteMovies = [Movie]()
+    
     var isWatchlist: Bool {
         return MovieModel.watchlist.contains(movieID!)
     }
@@ -54,6 +57,50 @@ class MovieDetailViewController: UIViewController {
         }
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.view.backgroundColor = UIColor.white
+        
+        _ = TMDBClient.getWatchlist() { movies, error in
+            DispatchQueue.main.async {
+                self.watchlistMovies = movies
+                
+                for movie in movies {
+                    MovieModel.watchlist.append(movie.id)
+                }
+                
+                print("MOVIE WATCHLIST: \(MovieModel.watchlist)")
+                
+                if MovieModel.watchlist.contains(self.movieID!) {
+                    self.watchListBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
+                } else {
+                    self.watchListBarButton.tintColor = UIColor.darkGray
+                }
+            }
+            
+            
+        }
+        
+        TMDBClient.getFavorites() { movies, error in
+            DispatchQueue.main.async {
+                self.favoriteMovies = movies
+                
+                for movie in movies {
+                    MovieModel.favorites.append(movie.id)
+                }
+                
+                print("MOVIE FAVORITES: \(MovieModel.favorites)")
+                
+                if MovieModel.favorites.contains(self.movieID!) {
+                    self.favoriteBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
+                } else {
+                    self.favoriteBarButton.tintColor = UIColor.darkGray
+                }
+            }
+            
+            
+        }
+        
+        print("MOVIE WATCHLIST: \(MovieModel.watchlist)")
+        
+        UserDefaults.standard.set(movieID, forKey: "MovieID")
         
     }
     
@@ -107,20 +154,7 @@ class MovieDetailViewController: UIViewController {
         if !movieSingleton.contains(movieName ?? "") {
             bookingButton.isHidden = true
         }
-        
-        if MovieModel.watchlist.contains(movieID!) {
-            watchListBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
-        } else {
-            watchListBarButton.tintColor = UIColor.darkGray
-        }
-        
-        if MovieModel.favorites.contains(movieID!) {
-            favoriteBarButton.tintColor = #colorLiteral(red: 1, green: 0.4190880954, blue: 0.3932890296, alpha: 1)
-        } else {
-            favoriteBarButton.tintColor = UIColor.darkGray
-        }
-        
-        UserDefaults.standard.set(movieID, forKey: "MovieID")
+    
     }
     
     func toggleBarButton(_ button: UIBarButtonItem, enabled: Bool) {
